@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/08 17:41:33 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/02/17 01:52:00 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <sys/wait.h>
 #include "../Libft/libft.h"
 
 char	*get_next_line(int fd);
 char	*free_memory(char **s,	int block);
+void	ft_file(void);
 #endif

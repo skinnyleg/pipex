@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/10 01:19:29 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/02/17 02:26:22 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int main(int ac, char **av, char *env[])
 	int		a;
 	int		i;
 	pid_t	pid;
+	char *hub[2] = {av[1], av[4]};
 
 	line = NULL;
 	path = NULL;
@@ -43,7 +44,8 @@ int main(int ac, char **av, char *env[])
 	i = 0;
 	if (ac == 5)
 	{
-		pipe(p);
+		if (access(av[4], F_OK) == 0)
+			unlink(av[4]);
 		p[0] = open(av[1], O_RDWR);
 		if (p[0] < 0)
 			ft_file();
@@ -58,49 +60,39 @@ int main(int ac, char **av, char *env[])
 		}
 		path = ft_split(env[i] + 5,':');
 		pid = fork();
-		if (!pid)
+		if (pid)
 		{
+			wait(NULL);
 			try2 = ft_strjoin("/", av[3]);
 			while(path[a])
 			{
 				try = ft_strjoin(path[a], try2);
-				if (execve(try, av, env) == -1)
+				if (access(try, F_OK) == 0)
 				{
-					printf("did not work\n");
-					free(try);
-				}
-				else
-				{
-					printf("did work\n");
 					free(try2);
-					free(try);
-					break ;
+					execve(try, hub, env);
 				}
+				free(try);
 				a++;
 			}
-		else if (pid)
+		}
+		else if (!pid)
 		{
-			wait(NULL);
 			try2 = ft_strjoin("/", av[2]);
 			while(path[a])
 			{
 				try = ft_strjoin(path[a], try2);
-				if (execve(try, av, env) == -1)
+				if (access(try, F_OK) == 0)
 				{
-					printf("did not work\n");
-					free(try);
-				}
-				else
-				{
-					printf("did work\n");
 					free(try2);
-					free(try);
 					break ;
+					//execve(try, av, env);
 				}
+				free(try);
 				a++;
 			}
 		}
-		line = get_next_line(1);
+		line = get_next_line(p[0]);
 		while(line)
 		{
 			a = ft_strlen(line);
