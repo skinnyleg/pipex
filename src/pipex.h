@@ -6,7 +6,7 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/17 01:52:00 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/22 02:05:40 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 #include "../Libft/libft.h"
 
 char	*get_next_line(int fd);
-char	*free_memory(char **s,	int block);
-void	ft_file(void);
+void    free_memory(char **s);
+void	ft_file(int	fd);
 #endif

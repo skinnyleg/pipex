@@ -6,104 +6,139 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/17 02:26:22 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/22 16:59:59 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*free_memory(char **s,	int block)
+void	free_memory(char **s)
 {
-	while (block--)
+	int	block;
+
+	block = 0;
+	while (s[block])
+	{
 		free(s[block]);
+		block++;
+	}
+}
+
+void	ft_file(int	fd)
+{
+	if (fd < 0)
+	{
+		ft_putstr_fd("unreadable file",1);
+		exit(1);
+	}
+}
+char	*ft_findpath(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i],"PATH",4) == 0)
+			return (env[i]);
+		i++;
+	}
 	return (NULL);
 }
 
-void	ft_file(void)
+char	*ft_path(char *env, char *av)
 {
-	ft_putstr_fd("unreadable file",1);
-	exit(1);
-}
-int main(int ac, char **av, char *env[])
-{
-	int		p[2];
-	char	*line;
 	char	**path;
+	char	**cmd;
+	char	*check;
 	char	*try;
-	char	*try2;
 	int		a;
-	int		i;
-	pid_t	pid;
-	char *hub[2] = {av[1], av[4]};
 
-	line = NULL;
-	path = NULL;
-	try = NULL;
-	try2 = NULL;
 	a = 0;
-	i = 0;
-	if (ac == 5)
+	try = NULL;
+	path = ft_split(env + 5, ':');
+	cmd = ft_split(av, ' ');
+	check = ft_strjoin("/", cmd[0]);
+	while (path[a])
 	{
-		if (access(av[4], F_OK) == 0)
-			unlink(av[4]);
-		p[0] = open(av[1], O_RDWR);
-		if (p[0] < 0)
-			ft_file();
-		p[1] = open(av[4], O_RDWR | O_CREAT, 777);
-		if (p[1] < 0)
-			ft_file();
-		while(env[i])
-		{
-			if(ft_strncmp(env[i],"PATH",4) == 0)
-				break ;
-			i++;
-		}
-		path = ft_split(env[i] + 5,':');
-		pid = fork();
-		if (pid)
-		{
-			wait(NULL);
-			try2 = ft_strjoin("/", av[3]);
-			while(path[a])
-			{
-				try = ft_strjoin(path[a], try2);
-				if (access(try, F_OK) == 0)
-				{
-					free(try2);
-					execve(try, hub, env);
-				}
-				free(try);
-				a++;
-			}
-		}
-		else if (!pid)
-		{
-			try2 = ft_strjoin("/", av[2]);
-			while(path[a])
-			{
-				try = ft_strjoin(path[a], try2);
-				if (access(try, F_OK) == 0)
-				{
-					free(try2);
-					break ;
-					//execve(try, av, env);
-				}
-				free(try);
-				a++;
-			}
-		}
-		line = get_next_line(p[0]);
-		while(line)
-		{
-			a = ft_strlen(line);
-			write(p[1],line,a);
-			free(line);
-			line = get_next_line(p[0]);
-		}
+		try = ft_strjoin(path[a], check);
+		if(access(try, F_OK) == 0)
+			return (free_memory(path), free_memory(cmd), free(check), try);
+		a++;
+		free(try);
+	}
+	return (NULL);
+}
+
+int	ft_child1(char **env, char **av, int *p)
+{
+	char	*path;
+	char	*paths;
+	char	**cmd;
+	int		fd;
+	pid_t	pid;
+
+	paths = ft_findpath(env);
+	cmd = ft_split(av[2], ' ');
+	path = ft_path(paths, cmd[0]);
+	fd = open(av[1], O_RDWR);
+	ft_file(fd);
+	pid = fork();
+	if(pid == 0)
+	{
+		dup2(fd,0);
+		dup2(p[1], 1);
 		close(p[0]);
 		close(p[1]);
+		close(fd);
+		execve(path, cmd, env);
 	}
-	else
-		perror("error");
+	free(path);
+	free_memory(cmd);
+	return (pid);
+}
+
+int	ft_child2(char **env, char **av, int *p)
+{
+	char	*path;
+	char	*paths;
+	char	**cmd;
+	int		fd;
+	pid_t	pid;
+
+	paths = ft_findpath(env);
+	cmd = ft_split(av[3], ' ');
+	path = ft_path(paths, cmd[0]);
+	fd = open(av[4], O_RDWR | O_CREAT, 777);
+	ft_file(fd);
+	pid = fork();
+	if(pid == 0)
+	{
+		dup2(fd, 1);
+		dup2(p[0], 1);
+		close(p[0]);
+		close(p[1]);
+		close(fd);
+		execve(path, cmd, env);
+	}
+	free(path);
+	free_memory(cmd);
+	return (pid);
+}
+
+int main(int ac, char **av, char *env[])
+{
+	int	p[2];
+	int	pid[2];
+	int	state;
+
+	if (ac != 5)
+		return(0);
+	if (pipe(p) == -1)
+		return (0);
+	pid[0] = ft_child1(env, av, p);
+	pid[1] = ft_child2(env, av, p);
+	waitpid(pid[0], &state, 0);
+	waitpid(pid[1], &state, 0);
 	return (0);
 }
