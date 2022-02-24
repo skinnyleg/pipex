@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 18:25:06 by hmoubal           #+#    #+#             */
-/*   Updated: 2021/11/06 21:14:59 by hmoubal          ###   ########.fr       */
+/*   Created: 2021/11/01 10:42:43 by hmoubal           #+#    #+#             */
+/*   Updated: 2022/02/24 23:24:28 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-void	ft_lstadd_back(t_list **lst,	t_list *new)
+size_t	ft_strlen(char const	*str)
 {
-	if (!*lst)
-		*lst = new;
-	else
-		ft_lstlast(*lst)->next = new;
+	size_t	a;
+
+	a = 0;
+	while (str[a] != '\0')
+		a++;
+	return (a);
 }

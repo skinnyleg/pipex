@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:01:34 by hmoubal           #+#    #+#             */
-/*   Updated: 2021/11/07 14:42:54 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/02/24 23:20:49 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-char	*ft_strjoin(char const *s1,	char const *s2)
+char	*ft_strjoin_pipex(char const *s1,	char const *s2)
 {
 	char	*tab;
 	size_t	i;

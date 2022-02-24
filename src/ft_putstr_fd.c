@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 09:21:42 by hmoubal           #+#    #+#             */
-/*   Updated: 2021/11/07 11:49:24 by hmoubal          ###   ########.fr       */
+/*   Created: 2021/11/04 11:29:26 by hmoubal           #+#    #+#             */
+/*   Updated: 2022/02/24 23:28:32 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-void	ft_lstiter(t_list *lst,	void (*f)(void *))
+void	ft_putstr_fd(char *s,	int fd)
 {
-	if (!lst || !f)
+	int	i;
+
+	i = 0;
+	if (!s)
 		return ;
-	while (lst->next != NULL)
+	while (s[i] != '\0')
 	{
-		f(lst->content);
-		lst = lst->next;
+		write(fd, &s[i], 1);
+		i++;
 	}
-	f(lst->content);
 }

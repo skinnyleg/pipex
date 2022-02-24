@@ -1,6 +1,7 @@
 CC := cc
 
-CFILES := src/pipex.c src/get_next_line.c
+CFILES := src/pipex.c src/get_next_line.c src/ft_strjoin_pipex.c src/ft_split.c src/ft_memcpy.c src/ft_strlen.c \
+		src/ft_strncmp.c src/ft_strdup.c src/ft_putstr_fd.c
 
 OFILES := $(CFILES:.c=.o)
 
@@ -10,21 +11,16 @@ INC := src/pipex.h
 
 NAME := pipex
 
-$(NAME) : libft.a $(OFILES) $(INC)
-	@$(CC) $(FLAGS) $(CFILES) Libft/libft.a -o $(NAME)
+$(NAME) : $(OFILES) $(INC)
+	@$(CC) $(FLAGS) $(CFILES) -o $(NAME)
 	@cd src && mv *.o ../obj/
-
-libft.a :
-	@cd Libft && make
 
 all : $(NAME)
 
 clean :
 	@cd obj/ && rm -rf *.o
-	@cd Libft/ && make clean
 
 fclean : clean
 	@rm -rf $(NAME)
-	@cd Libft/ && make fclean
 
 re : fclean all

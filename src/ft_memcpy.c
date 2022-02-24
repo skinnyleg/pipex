@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 17:37:09 by hmoubal           #+#    #+#             */
-/*   Updated: 2021/11/06 21:22:23 by hmoubal          ###   ########.fr       */
+/*   Created: 2021/11/01 16:29:35 by hmoubal           #+#    #+#             */
+/*   Updated: 2022/02/24 23:24:23 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-void	*ft_memchr(const void *tab,	int a,	size_t v)
+void	*ft_memcpy(void *dest,	const void *src,	size_t size)
 {
-	unsigned char	i;
-	unsigned char	*p1;
+	char	*p1;
+	char	*p2;
+	int		i;
 
-	i = (unsigned char)a;
-	p1 = (unsigned char *)tab;
-	while (v > 0)
+	p1 = dest;
+	p2 = (char *)src;
+	if (!p1 && !p2)
+		return (NULL);
+	i = 0;
+	while (size != 0)
 	{
-		if (*p1 == i)
-			return (p1);
-		v--;
-		p1++;
+		p1[i] = p2[i];
+		i++;
+		size--;
 	}
-	return (NULL);
+	return (dest);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:39:36 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/07 18:34:28 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/02/24 23:19:25 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_strjoin1(char const *s1,	char const *s2)
+static char	*ft_strjoin(char const *s1,	char const *s2)
 {
 	char	*tab;
 	size_t	i;
@@ -110,7 +110,7 @@ char	*get_next_line(int fd)
 		if (!rem)
 			rem = ft_strdup(buff);
 		else
-			rem = ft_strjoin1(rem, buff);
+			rem = ft_strjoin(rem, buff);
 		if (get_line(rem) != -1)
 			break ;
 	}
