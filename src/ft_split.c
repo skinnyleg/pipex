@@ -6,11 +6,11 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 21:32:33 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/24 23:18:21 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/25 23:14:57 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 static int	calc_block(char const *str,	char c)
 {

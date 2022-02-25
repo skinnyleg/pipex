@@ -1,26 +1,49 @@
-CC := cc
+CFILES	=	pipex.c\
+			get_next_line.c\
+			ft_strjoin_pipex.c\
+			ft_split.c\
+			ft_memcpy.c\
+			ft_strlen.c\
+			ft_strncmp.c\
+			ft_strdup.c\
+			ft_putstr_fd.c\
+			ft_pipex_utils.c\
 
-CFILES := src/pipex.c src/get_next_line.c src/ft_strjoin_pipex.c src/ft_split.c src/ft_memcpy.c src/ft_strlen.c \
-		src/ft_strncmp.c src/ft_strdup.c src/ft_putstr_fd.c src/ft_pipex_utils.c
+HEADER = 	includes/pipex.h
 
-OFILES := $(CFILES:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR)/,$(CFILES:.c=.o))
 
-FLAGS := -Wall -Werror -Wextra
+NAME 	= pipex
 
-INC := src/pipex.h
+CFLAGS = -Wall -Wextra -Werror
 
-NAME := pipex
+OBJ_DIR = ./obj
 
-$(NAME) : $(OFILES) $(INC)
-	@$(CC) $(FLAGS) $(CFILES) -o $(NAME)
-	@cd src && mv *.o ../obj/
+CC = cc
+
+SRC_DIR = ./src
 
 all : $(NAME)
 
+
+$(NAME) : $(OBJ)
+	@$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
+	@echo "Done for pipex"
+
+$(OBJ_DIR):
+	@mkdir $(OBJ_DIR)
+
+$(OBJ): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
+	@$(CC) -c $< -o $@
+
 clean :
-	@cd obj/ && rm -rf *.o
+	@rm -rf $(OBJ_DIR)
 
 fclean : clean
 	@rm -rf $(NAME)
+
+norme:
+	@norminette **/*.c
+	@norminette **/*.h
 
 re : fclean all

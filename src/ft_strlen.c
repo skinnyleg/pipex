@@ -6,11 +6,11 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 10:42:43 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/24 23:24:28 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/25 23:14:57 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 size_t	ft_strlen(char const	*str)
 {

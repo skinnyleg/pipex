@@ -6,11 +6,11 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:46:44 by haitam            #+#    #+#             */
-/*   Updated: 2022/02/24 23:48:00 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/25 23:14:57 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	free_memory_pipex(char **s)
 {

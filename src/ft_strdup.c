@@ -6,11 +6,11 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 18:54:22 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/24 23:27:20 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/25 23:14:57 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 char	*ft_strdup(const char *src)
 {

@@ -6,11 +6,11 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 11:29:26 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/24 23:28:32 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/25 23:17:05 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	ft_putstr_fd(char *s,	int fd)
 {
