@@ -6,7 +6,7 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/25 23:14:57 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/26 01:23:04 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	ft_child1(char **env, char **av, int *p)
 	cmd = ft_split(av[2], ' ');
 	path = ft_path(paths, cmd[0]);
 	pid = fork();
+	ft_pid(pid);
 	if (pid == 0)
 	{
 		fd = open(av[1], O_RDWR);
@@ -94,6 +95,7 @@ int	ft_child2(char **env, char **av, int *p)
 	cmd = ft_split(av[3], ' ');
 	path = ft_path(paths, cmd[0]);
 	pid = fork();
+	ft_pid(pid);
 	if (pid == 0)
 	{
 		fd = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 777);
@@ -117,9 +119,9 @@ int	main(int ac, char **av, char *env[])
 	int	state;
 
 	if (ac != 5)
-		return (0);
+		return (ft_putstr_fd("input error", 1), 0);
 	if (pipe(p) == -1)
-		return (0);
+		return (ft_putstr_fd("pipe error", 1), 0);
 	pid[0] = ft_child1(env, av, p);
 	pid[1] = ft_child2(env, av, p);
 	close(p[0]);

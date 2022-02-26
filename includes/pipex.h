@@ -6,7 +6,7 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/24 23:41:54 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/26 01:21:02 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ int		ft_strncmp(const char *str, const char *tab, size_t a);
 char	*ft_strdup(const char *src);
 void	*ft_memcpy(void *dest,	const void *src,	size_t size);
 void	ft_putstr_fd(char *s,	int fd);
+void	ft_pid(pid_t pid);
 #endif

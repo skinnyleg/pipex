@@ -8,6 +8,7 @@ CFILES	=	pipex.c\
 			ft_strdup.c\
 			ft_putstr_fd.c\
 			ft_pipex_utils.c\
+			ft_pid.c\
 
 HEADER = 	includes/pipex.h
 

@@ -1,11 +1,1 @@
-total 52
-drwxrwxr-x 6 haitam haitam  4096 Feb 24 23:29 .
-drwxr-xr-x 6 haitam haitam  4096 Feb 24 22:28 ..
-drwxrwxr-x 8 haitam haitam  4096 Feb 22 19:47 .git
--rw-rw-r-- 1 haitam haitam     0 Feb 22 01:50 infile
-drwxrwxr-x 2 haitam haitam  4096 Feb 24 23:17 Libft
--rw-rw-r-- 1 haitam haitam   463 Feb 24 23:28 Makefile
-drwxrwxr-x 2 haitam haitam  4096 Feb 24 23:29 obj
--rw-rw-r-- 1 haitam haitam     0 Feb 24 23:29 outfile
--rwxrwxr-x 1 haitam haitam 22424 Feb 24 23:29 pipex
-drwxrwxr-x 2 haitam haitam  4096 Feb 24 23:29 src
+     11      92     526
