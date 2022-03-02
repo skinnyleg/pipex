@@ -6,7 +6,7 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/26 01:23:04 by haitam           ###   ########.fr       */
+/*   Updated: 2022/02/26 16:22:47 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,13 @@ char	*ft_path(char *env, char *av)
 	return (NULL);
 }
 
-int	ft_child1(char **env, char **av, int *p)
+int	ft_child1(char *paths, char **av, int *p, char **env)
 {
 	char	*path;
-	char	*paths;
 	char	**cmd;
 	int		fd;
 	pid_t	pid;
 
-	paths = ft_findpath(env);
 	cmd = ft_split(av[2], ' ');
 	path = ft_path(paths, cmd[0]);
 	pid = fork();
@@ -83,15 +81,13 @@ int	ft_child1(char **env, char **av, int *p)
 	return (pid);
 }
 
-int	ft_child2(char **env, char **av, int *p)
+int	ft_child2(char *paths, char **av, int *p, char **env)
 {
 	char	*path;
-	char	*paths;
 	char	**cmd;
 	int		fd;
 	pid_t	pid;
 
-	paths = ft_findpath(env);
 	cmd = ft_split(av[3], ' ');
 	path = ft_path(paths, cmd[0]);
 	pid = fork();
@@ -114,16 +110,19 @@ int	ft_child2(char **env, char **av, int *p)
 
 int	main(int ac, char **av, char *env[])
 {
-	int	p[2];
-	int	pid[2];
-	int	state;
+	int		p[2];
+	int		pid[2];
+	int		state;
+	char	*paths;
 
 	if (ac != 5)
 		return (ft_putstr_fd("input error", 1), 0);
 	if (pipe(p) == -1)
 		return (ft_putstr_fd("pipe error", 1), 0);
-	pid[0] = ft_child1(env, av, p);
-	pid[1] = ft_child2(env, av, p);
+	paths = ft_findpath(env);
+	ft_path_checker(paths);
+	pid[0] = ft_child1(paths, av, p, env);
+	pid[1] = ft_child2(paths, av, p, env);
 	close(p[0]);
 	close(p[1]);
 	waitpid(pid[0], &state, 0);

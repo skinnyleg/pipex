@@ -1,11 +1,9 @@
 CFILES	=	pipex.c\
-			get_next_line.c\
 			ft_strjoin_pipex.c\
 			ft_split.c\
 			ft_memcpy.c\
 			ft_strlen.c\
 			ft_strncmp.c\
-			ft_strdup.c\
 			ft_putstr_fd.c\
 			ft_pipex_utils.c\
 			ft_pid.c\
