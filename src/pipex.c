@@ -6,7 +6,7 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/02/26 16:22:47 by haitam           ###   ########.fr       */
+/*   Updated: 2022/03/06 00:13:07 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	ft_child1(char *paths, char **av, int *p, char **env)
 		dup2(fd, 0);
 		close(p[1]);
 		close(fd);
-		execve(path, cmd, env);
+		if (execve(path, cmd, env) == -1)
+			ft_execve_error(path, cmd);
 	}
 	free(path);
 	free_memory_pipex(cmd);
@@ -101,7 +102,8 @@ int	ft_child2(char *paths, char **av, int *p, char **env)
 		dup2(fd, 1);
 		close(p[0]);
 		close(fd);
-		execve(path, cmd, env);
+		if (execve(path, cmd, env) == -1)
+			ft_execve_error(path, cmd);
 	}
 	free(path);
 	free_memory_pipex(cmd);
