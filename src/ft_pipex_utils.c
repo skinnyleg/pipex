@@ -6,7 +6,7 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:46:44 by haitam            #+#    #+#             */
-/*   Updated: 2022/02/25 23:14:57 by haitam           ###   ########.fr       */
+/*   Updated: 2022/03/06 00:28:14 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	free_memory_pipex(char **s)
 	}
 }
 
-void	ft_file(int fd)
+void	ft_file(int fd, char *path, char **cmd)
 {
 	if (fd < 0)
 	{
+		free(path);
+		free_memory_pipex(cmd);
 		ft_putstr_fd("unreadable file", 1);
 		exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/03/06 00:13:07 by haitam           ###   ########.fr       */
+/*   Updated: 2022/03/06 00:27:44 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int	ft_child1(char *paths, char **av, int *p, char **env)
 	cmd = ft_split(av[2], ' ');
 	path = ft_path(paths, cmd[0]);
 	pid = fork();
-	ft_pid(pid);
+	ft_pid(pid, path, cmd);
 	if (pid == 0)
 	{
 		fd = open(av[1], O_RDWR);
-		ft_file(fd);
+		ft_file(fd, path, cmd);
 		dup2(p[1], 1);
 		close(p[0]);
 		dup2(fd, 0);
@@ -92,11 +92,11 @@ int	ft_child2(char *paths, char **av, int *p, char **env)
 	cmd = ft_split(av[3], ' ');
 	path = ft_path(paths, cmd[0]);
 	pid = fork();
-	ft_pid(pid);
+	ft_pid(pid, path, cmd);
 	if (pid == 0)
 	{
 		fd = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 777);
-		ft_file(fd);
+		ft_file(fd, path, cmd);
 		dup2(p[0], 0);
 		close(p[1]);
 		dup2(fd, 1);

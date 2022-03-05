@@ -13,7 +13,7 @@ HEADER = 	includes/pipex.h
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(CFILES:.c=.o))
 
-NAME 	= pipex
+NAME = pipex
 
 CFLAGS = -Wall -Wextra -Werror
 
