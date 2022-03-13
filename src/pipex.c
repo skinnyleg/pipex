@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/03/13 02:57:36 by haitam           ###   ########.fr       */
+/*   Updated: 2022/03/13 22:24:30 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	ft_child1(char *paths, char **av, int *p, char **env)
 
 	cmd = ft_split(av[2], ' ');
 	path = ft_path(paths, cmd[0]);
+	ft_path_null(path, cmd);
 	pid = fork();
 	ft_pid(pid, path, cmd);
 	if (pid == 0)
@@ -91,11 +92,12 @@ int	ft_child2(char *paths, char **av, int *p, char **env)
 
 	cmd = ft_split(av[3], ' ');
 	path = ft_path(paths, cmd[0]);
+	ft_path_null(path, cmd);
 	pid = fork();
 	ft_pid(pid, path, cmd);
 	if (pid == 0)
 	{
-		fd = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 777);
+		fd = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
 		ft_file(fd, path, cmd);
 		dup2(p[0], 0);
 		close(p[1]);

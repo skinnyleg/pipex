@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/03/06 00:28:26 by haitam           ###   ########.fr       */
+/*   Updated: 2022/03/13 22:24:20 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ void	ft_putstr_fd(char *s,	int fd);
 void	ft_pid(pid_t pid, char *path, char **cmd);
 void	ft_path_checker(char *paths);
 void	ft_execve_error(char *path, char **cmd);
+void	ft_path_null(char *path, char **cmd);
 #endif
