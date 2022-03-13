@@ -6,7 +6,7 @@
 /*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/03/06 00:27:44 by haitam           ###   ########.fr       */
+/*   Updated: 2022/03/13 02:57:36 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int	main(int ac, char **av, char *env[])
 {
 	int		p[2];
 	int		pid[2];
-	int		state;
 	char	*paths;
 
 	if (ac != 5)
@@ -127,7 +126,7 @@ int	main(int ac, char **av, char *env[])
 	pid[1] = ft_child2(paths, av, p, env);
 	close(p[0]);
 	close(p[1]);
-	waitpid(pid[0], &state, 0);
-	waitpid(pid[1], &state, 0);
+	waitpid(pid[0], NULL, 0);
+	waitpid(pid[1], NULL, 0);
 	return (0);
 }
