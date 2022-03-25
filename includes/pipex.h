@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/03/13 22:24:20 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/03/25 14:44:29 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	*ft_memcpy(void *dest,	const void *src,	size_t size);
 void	ft_putstr_fd(char *s,	int fd);
 void	ft_pid(pid_t pid, char *path, char **cmd);
 void	ft_path_checker(char *paths);
-void	ft_execve_error(char *path, char **cmd);
+void	ft_execve_error(char *path, char **cmd, int a);
+void	ft_split_check(char **cmd);
 void	ft_path_null(char *path, char **cmd);
+char	*ft_strdup(const char *src);
+void	ft_read(int *p, char *path, char **cmd);
 #endif
