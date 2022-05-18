@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/03/25 14:58:58 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/05/18 17:48:37 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ int	main(int ac, char **av, char *env[])
 	pid[1] = ft_child2(paths, av, p, env);
 	close(p[0]);
 	close(p[1]);
+	waitpid(-1, 0, 0);
 	return (0);
 }
