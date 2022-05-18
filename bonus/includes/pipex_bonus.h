@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/05/18 18:29:29 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/05/18 22:14:13 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ char	*ft_strdup(const char *src);
 void	ft_read(int *p, char *path, char **cmd);
 int		ft_child_rep(char *paths, char **av, int *p, char **env);
 char	*ft_path(char *env, char *av);
+int		ft_child_one(char *paths, char **av, char **env);
 #endif
