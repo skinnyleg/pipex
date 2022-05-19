@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/05/19 15:19:22 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/05/19 19:22:12 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,26 @@ void	ft_first(t_all *var, char **av, char **env, int index)
 	char	*path;
 	char	**cmd;
 	int		j;
+	int		i;
 
-	j = 0;
+	i = 0;
+	j = (index + index);
+	if (j != 0)
+		j = j - 2;
 	cmd = ft_split(av[index + 2], ' ');
 	ft_split_check(cmd);
 	path = ft_path(var->paths, cmd[0]);
 	ft_path_null(path, cmd);
-	while (j < var->pipe_num)
+	while (i < var->fork_num * 2)
 	{
-		close(var->p[j][0]);
-		if (j != index + 1)
-			close(var->p[j][1]);
-		j++;
+		if (i == index + 1)
+			close(var->arr[i]);
+		i++;
 	}
-	dup2(var->p[index + 1][index + 1], 1);
+	dup2(var->arr[j + 1], 1);
 	dup2(var->fd[0], 0);
 	close(var->fd[0]);
-	close(var->p[index + 1][index + 1]);
+	close(var->arr[j + 1]);
 	close(var->fd[1]);
 	if (execve(path, cmd, env) == -1)
 		ft_execve_error(path, cmd, 3);
@@ -142,26 +145,28 @@ void	ft_middle(t_all *var, char **av, char **env, int index)
 	char	*path;
 	char	**cmd;
 	int		j;
+	int		i;
 
-	j = 0;
+	i = 0;
+	j = (index + index);
+	if (j != 0)
+		j = j - 2;
 	cmd = ft_split(av[index + 2], ' ');
 	ft_split_check(cmd);
 	path = ft_path(var->paths, cmd[0]);
 	ft_path_null(path, cmd);
-	while (j < var->pipe_num)
+	while (i < var->fork_num * 2)
 	{
-		if (j != index)
-			close(var->p[j][0]);
-		if (j != index + 1)
-			close(var->p[j][1]);
-		j++;
+		if (i == index + 1 && i != j)
+			close(var->arr[i]);
+		i++;
 	}
-	dup2(var->p[index][index - 1], 0);
-	dup2(var->p[index + 1][index + 1], 1);
+	dup2(var->arr[j], 0);
+	dup2(var->arr[j + 3], 1);
 	close(var->fd[0]);
 	close(var->fd[1]);
-	close(var->p[index][index - 1]);
-	close(var->p[index + 1][index + 1]);
+	close(var->arr[j]);
+	close(var->arr[j + 3]);
 	if (execve(path, cmd, env) == -1)
 		ft_execve_error(path, cmd, 3);
 }
@@ -171,24 +176,27 @@ void	ft_last(t_all *var, char **av, char **env, int index)
 	char	*path;
 	char	**cmd;
 	int		j;
+	int		i;
 
-	j = 0;
+	i = 0;
+	j = (index + index);
+	if (j != 0)
+		j = j - 2;
 	cmd = ft_split(av[index + 2], ' ');
 	ft_split_check(cmd);
 	path = ft_path(var->paths, cmd[0]);
 	ft_path_null(path, cmd);
-	while (j < var->pipe_num)
+	while (i < var->fork_num * 2)
 	{
-		if (j != index)
-			close(var->p[j][0]);
-		close(var->p[j][1]);
-		j++;
+		if (i != j)
+			close(var->arr[i]);
+		i++;
 	}
-	dup2(var->p[index][0], 0);
+	dup2(var->arr[j], 0);
 	dup2(var->fd[1], 1);
 	close(var->fd[0]);
 	close(var->fd[1]);
-	close(var->p[index][0]);
+	close(var->arr[j]);
 	if (execve(path, cmd, env) == -1)
 		ft_execve_error(path, cmd, 3);
 }
@@ -221,10 +229,15 @@ int	main(int ac, char **av, char *env[])
 		printf("ERROR\n");
 		exit(1);
 	}
-	if (pipe(var.arr) == -1)
+	var.i = 0;
+	while (var.i < var.fork_num * 2)
 	{
-		printf("ERROR\n");
-		exit(1);
+		if (pipe(var.arr + var.i) == -1)
+		{
+			printf("ERROR\n");
+			exit(1);
+		}
+		var.i += 2;
 	}
 	var.pid = (pid_t *)malloc(sizeof(pid_t) * var.fork_num);
 	if (var.pid == NULL)
@@ -262,7 +275,6 @@ int	main(int ac, char **av, char *env[])
 		}
 		(var.i)++;
 	}
-	printf("hello\n");
 	var.j = 0;
 	while (var.j < var.pipe_num * 2)
 	{
