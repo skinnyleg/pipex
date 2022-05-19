@@ -9,7 +9,7 @@ CFILES	=	pipex.c\
 			ft_pid.c\
 			ft_execve_error.c\
 
-BFILES	=	pipex.c\
+BFILES	=	pipex_tab.c\
 			ft_strjoin_pipex.c\
 			ft_split.c\
 			ft_memcpy.c\

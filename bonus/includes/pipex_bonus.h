@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/05/18 22:14:13 by haitam           ###   ########.fr       */
+/*   Updated: 2022/05/19 15:17:40 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@
 # include <fcntl.h>
 # include <string.h>
 # include <sys/wait.h>
+
+typedef struct s_all{
+	char	*paths;
+	int		i;
+	int		j;
+	int		fd[2];
+	int		**p;
+	int		*arr;
+	int		*pid;
+	int		fork_num;
+	int		pipe_num;
+
+}	t_all;
 
 void	free_memory_pipex(char **s);
 void	ft_file(int fd, char *path, char **cmd);
