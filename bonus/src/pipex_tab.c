@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/05/19 19:22:12 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/05/20 00:39:17 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	ft_first(t_all *var, char **av, char **env, int index)
 	dup2(var->arr[j + 1], 1);
 	dup2(var->fd[0], 0);
 	close(var->fd[0]);
-	close(var->arr[j + 1]);
+	// close(var->arr[j + 1]);
 	close(var->fd[1]);
 	if (execve(path, cmd, env) == -1)
 		ft_execve_error(path, cmd, 3);
@@ -275,12 +275,12 @@ int	main(int ac, char **av, char *env[])
 		}
 		(var.i)++;
 	}
-	var.j = 0;
-	while (var.j < var.pipe_num * 2)
-	{
-		close(var.arr[var.j]);
-		(var.j)++;
-	}
+	// var.j = 0;
+	// while (var.j < var.pipe_num * 2)
+	// {
+	// 	close(var.arr[var.j]);
+	// 	(var.j)++;
+	// }
 	var.i = 0;
 	while (var.i < var.fork_num)
 	{

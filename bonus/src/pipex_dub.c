@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_dub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haitam <haitam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/05/19 15:08:42 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/05/20 01:02:20 by haitam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,18 +150,18 @@ void	ft_middle(t_all *var, char **av, char **env, int index)
 	ft_path_null(path, cmd);
 	while (j < var->pipe_num)
 	{
-		if (j != index)
+		if (j != index - 1)
 			close(var->p[j][0]);
-		if (j != index + 1)
+		if (j != index)
 			close(var->p[j][1]);
 		j++;
 	}
-	dup2(var->p[index][index - 1], 0);
-	dup2(var->p[index + 1][index + 1], 1);
+	dup2(var->p[index - 1][0], 0);
+	dup2(var->p[index][1], 1);
 	close(var->fd[0]);
 	close(var->fd[1]);
-	close(var->p[index][index - 1]);
-	close(var->p[index + 1][index + 1]);
+	close(var->p[index - 1][0]);
+	close(var->p[index][0]);
 	if (execve(path, cmd, env) == -1)
 		ft_execve_error(path, cmd, 3);
 }
@@ -179,16 +179,16 @@ void	ft_last(t_all *var, char **av, char **env, int index)
 	ft_path_null(path, cmd);
 	while (j < var->pipe_num)
 	{
-		if (j != index)
+		if (j != index - 1)
 			close(var->p[j][0]);
 		close(var->p[j][1]);
 		j++;
 	}
-	dup2(var->p[index][0], 0);
+	dup2(var->p[index - 1][0], 0);
 	dup2(var->fd[1], 1);
 	close(var->fd[0]);
 	close(var->fd[1]);
-	close(var->p[index][0]);
+	close(var->p[index - 1][0]);
 	if (execve(path, cmd, env) == -1)
 		ft_execve_error(path, cmd, 3);
 }
@@ -272,12 +272,6 @@ int	main(int ac, char **av, char *env[])
 		}
 		(var.i)++;
 	}
-	var.i = 0;
-	while (var.i < var.fork_num)
-	{
-		wait(NULL);
-		(var.i)++;
-	}
 	var.j = 0;
 	while (var.j < var.pipe_num)
 	{
@@ -285,6 +279,12 @@ int	main(int ac, char **av, char *env[])
 		close(var.p[var.j][1]);
 		(var.j)++;
 	}
-	printf("hello form main process\n");
+	var.i = 0;
+	while (var.i < var.fork_num)
+	{
+		wait(NULL);
+		(var.i)++;
+	}
+	// printf("hello form main process\n");
 	return (0);
 }
