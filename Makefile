@@ -19,7 +19,6 @@ BFILES	=	pipex_dub.c\
 			ft_pipex_utils.c\
 			ft_pid.c\
 			ft_execve_error.c\
-			ft_child_rep.c\
 
 HEADER = 	mand/includes/pipex.h
 

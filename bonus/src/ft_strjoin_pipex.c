@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:01:34 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/05/18 17:53:31 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/05/20 17:59:29 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,29 @@ char	*ft_strjoin_pipex(char const *s1,	char const *s2)
 	}
 	tab[k] = '\0';
 	return (tab);
+}
+
+void	ft_routine(t_all *var, char **av, char **env)
+{
+	var->i = 0;
+	while (var->i < var->fork_num)
+	{
+		var->pid[var->i] = fork();
+		if (var->pid[var->i] == -1)
+		{
+			printf("ERROR\n");
+			exit(1);
+		}
+		if (var->pid[var->i] == 0)
+		{
+			if (var->i == 0)
+				ft_first(var, av, env, var->i);
+			if (var->i > 0 && var->i < var->fork_num - 1)
+				ft_middle(var, av, env, var->i);
+			if (var->i == var->fork_num - 1)
+				ft_last(var, av, env, var->i);
+			return ;
+		}
+		(var->i)++;
+	}
 }

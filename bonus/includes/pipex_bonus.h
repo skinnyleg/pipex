@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/05/19 17:28:32 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/05/20 18:00:13 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,12 @@ char	*ft_strdup(const char *src);
 void	ft_read(int *p, char *path, char **cmd);
 int		ft_child_rep(char *paths, char **av, int *p, char **env);
 char	*ft_path(char *env, char *av);
-int		ft_child_one(char *paths, char **av, char **env);
+char	*ft_findpath(char **env);
+void	ft_malloc(void *tab);
+void	ft_init(t_all *var, char **env, int ac, char **av);
+void	ft_init2(t_all *var);
+void	ft_routine(t_all *var, char **av, char **env);
+void	ft_first(t_all *var, char **av, char **env, int index);
+void	ft_middle(t_all *var, char **av, char **env, int index);
+void	ft_last(t_all *var, char **av, char **env, int index);
 #endif
