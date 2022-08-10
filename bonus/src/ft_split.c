@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 21:32:33 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/08/10 14:50:39 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/10 17:55:46 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char	*free_memory(char **s,	int block)
 {
 	while (block--)
 		free(s[block]);
+	free(s);
 	return (NULL);
 }
 

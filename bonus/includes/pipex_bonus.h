@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/08/10 15:09:56 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/10 18:07:03 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ typedef struct s_var
 {
 	char	*cmd_path;
 	char	**cmd;
-	int		p[2];
+	int		**p;
 	char	**paths;
 	int		i;
+	int		j;
 	int		fork_num;
 	int		pipe_num;
 	int		fd[2];
@@ -44,8 +45,9 @@ void	close_all(t_var *var);
 void	ft_check_env(t_var *var);
 void	ft_check_cmd(t_var *var);
 void	init_cmd(t_var *var, char *cmd);
-void	init(t_var *var, char **av, char **env);
+void	init(t_var *var, char **av, char **env, int ac);
 void	ft_check_path(t_var *var);
 char	**ft_findpath(char **env);
 char	*ft_path(t_var *var, char *av);
+void	free_int(int **s,	int block);
 #endif

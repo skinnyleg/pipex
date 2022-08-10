@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:46:44 by haitam            #+#    #+#             */
-/*   Updated: 2022/08/10 14:50:35 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/10 18:07:24 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ void	free_2d(char **s)
 		free(s[block]);
 		block++;
 	}
+	free(s);
+}
+
+void	free_int(int **s,	int block)
+{
+	while (block--)
+		free(s[block]);
 	free(s);
 }
 

@@ -65,8 +65,4 @@ clean :
 fclean : clean
 	@rm -rf $(NAME) $(BONUS)
 
-norme:
-	@norminette **/*.c
-	@norminette **/*.h
-
 re : fclean all
