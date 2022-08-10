@@ -6,13 +6,13 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:46:44 by haitam            #+#    #+#             */
-/*   Updated: 2022/03/25 14:58:30 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/10 14:22:43 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	free_memory_pipex(char **s)
+void	free_2d(char **s)
 {
 	int	block;
 
@@ -25,31 +25,38 @@ void	free_memory_pipex(char **s)
 	free(s);
 }
 
-void	ft_file(int fd, char *path, char **cmd)
+void	ft_file(t_var *var)
 {
-	if (fd < 0)
+	if (var->fd[0] < 0 || var->fd[1] < 0)
 	{
-		free(path);
-		free_memory_pipex(cmd);
-		ft_putstr_fd("unreadable file", 1);
+		close_all(var);
+		if (var->fd[0] < 0)
+			ft_putstr_fd("unreadable file\n", 2);
+		else
+			ft_putstr_fd("Can't create output file\n", 2);
 		exit(1);
 	}
 }
 
-void	ft_read(int *p, char *path, char **cmd)
+void	ft_check_env(t_var *var)
 {
-	char	*str;
-
-	str = malloc(2);
-	read(p[0], str, 2);
-	if (ft_strncmp(str, "-1", 2) == 0)
+	if (var->paths == NULL)
 	{
-		free(path);
-		free_memory_pipex(cmd);
-		close(p[1]);
-		close(p[0]);
-		free(str);
+		ft_putstr_fd("env error\n", 2);
+		close_all(var);
 		exit(1);
 	}
-	free(str);
+}
+
+void	ft_pid(pid_t pid, t_var *var)
+{
+	if (pid == -1)
+	{
+		free(var->cmd_path);
+		free_2d(var->cmd);
+		free_2d(var->paths);
+		close_all(var);
+		ft_putstr_fd("fork error", 2);
+		exit(1);
+	}
 }

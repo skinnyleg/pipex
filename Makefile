@@ -1,48 +1,38 @@
-CFILES	=	pipex.c\
-			ft_strjoin_pipex.c\
-			ft_split.c\
-			ft_memcpy.c\
-			ft_strlen.c\
-			ft_strncmp.c\
-			ft_putstr_fd.c\
-			ft_pipex_utils.c\
-			ft_pid.c\
-			ft_execve_error.c\
-
-BFILES	=	pipex_dub.c\
-			ft_strjoin_pipex.c\
-			ft_split.c\
-			ft_memcpy.c\
-			ft_strlen.c\
-			ft_strncmp.c\
-			ft_putstr_fd.c\
-			ft_pipex_utils.c\
-			ft_pid.c\
-			ft_execve_error.c\
-
-HEADER = 	mand/includes/pipex.h
-
-HEADERB = 	bonus/includes/pipex.h
-
-OBJ = $(addprefix $(OBJ_DIR)/,$(CFILES:.c=.o))
-
-OBJ_B = $(addprefix $(OBJ_DIRB)/,$(BFILES:.c=.o))
-
-NAME = pipex
-
-bonus = pipex_bonus
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
+CFILES	=	pipex.c\
+			pipex2.c\
+			libft_utils.c\
+			ft_split.c\
+			ft_pipex_utils.c\
+
+OBJ = $(addprefix $(OBJ_DIR)/,$(CFILES:.c=.o))
+
+HEADER = 	mand/includes/pipex.h
+
+NAME = pipex
+
 OBJ_DIR = ./mand/obj
+
+SRC_DIR = mand/src
+
+BFILES	=	pipex.c\
+			pipex2.c\
+			libft_utils.c\
+			ft_split.c\
+			ft_pipex_utils.c\
+
+OBJB = $(addprefix $(OBJ_DIRB)/,$(BFILES:.c=.o))
 
 OBJ_DIRB = ./bonus/obj
 
-CC = cc
+HEADERB = 	bonus/includes/pipex_bonus.h
 
-SRC_DIR = ./mand/src
+BONUS = pipex_bonus
 
-SRC_DIRB = ./bonus/src
+BON_DIR = bonus/src
 
 all : $(NAME)
 
@@ -57,25 +47,23 @@ $(OBJ_DIR):
 $(OBJ): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
 	@$(CC) -c $< -o $@
 
-bonus : $(bonus)
+bonus : $(BONUS)
 
-$(bonus) : $(OBJ_B)
-	@$(CC) $(OBJ_B) $(CFLAGS) -o $(bonus)
+$(BONUS) : $(OBJB)
+	@$(CC) $(OBJB) $(CFLAGS) -o $(BONUS)
 	@echo "Done for pipex_bonus"
-
-$(OBJ_B): $(OBJ_DIRB)/%.o : $(SRC_DIRB)/%.c $(HEADER_B) | $(OBJ_DIRB)
-	@$(CC) -c $< -o $@
 
 $(OBJ_DIRB):
 	@mkdir $(OBJ_DIRB)
 
+$(OBJB): $(OBJ_DIRB)/%.o : $(BON_DIR)/%.c $(HEADERB) | $(OBJ_DIRB)
+	@$(CC) -c $< -o $@
+
 clean :
-	@rm -rf $(OBJ_DIR)
-	@rm -rf $(OBJ_DIRB)
+	@rm -rf $(OBJ_DIR) $(OBJ_DIRB)
 
 fclean : clean
-	@rm -rf $(NAME)
-	@rm -rf $(bonus)
+	@rm -rf $(NAME) $(BONUS)
 
 norme:
 	@norminette **/*.c
