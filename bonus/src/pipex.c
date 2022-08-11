@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:08 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/08/11 12:12:09 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:07:47 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	main(int ac, char **av, char *env[])
 	var.ac = ac;
 	if (ft_strncmp(av[1], "here_doc", ft_strlen(av[1])) == 0)
 	{
+		if (ac <= 5)
+			return (ft_putstr_fd("input error\n", 2), 0);
 		var.j = 1;
 		mode_heredoc(av, env, ac, var);
 	}

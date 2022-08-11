@@ -34,7 +34,7 @@ BON_DIR = bonus/src
 
 LIBFT = libft/libft.a
 
-all : bonus
+all : $(NAME)
 
 
 $(NAME) : $(LIBFT) $(OBJ)

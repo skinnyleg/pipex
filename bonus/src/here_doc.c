@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:07:53 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/08/11 12:15:12 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:06:55 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	normal_mode(char **av, char **env, int ac, t_var var)
 	ft_child2(&var, env);
 	free_2d(var.paths);
 	close_all(&var);
+	free_int(var.p, var.pipe_num);
 	var.i = 0;
 	while (var.i < var.fork_num)
 	{

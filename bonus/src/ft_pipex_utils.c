@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:46:44 by haitam            #+#    #+#             */
-/*   Updated: 2022/08/10 18:07:24 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:11:39 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_file(t_var *var)
 	if (var->fd[0] < 0 || var->fd[1] < 0)
 	{
 		close_all(var);
+		free_int(var->p, var->pipe_num);
 		if (var->fd[0] < 0)
 			ft_putstr_fd("unreadable file\n", 2);
 		else
@@ -51,6 +52,7 @@ void	ft_check_env(t_var *var)
 	{
 		ft_putstr_fd("env error\n", 2);
 		close_all(var);
+		free_int(var->p, var->pipe_num);
 		exit(1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:46:43 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/08/11 12:11:38 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:14:13 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_check_cmd(t_var *var)
 		ft_putstr_fd("Malloc Error\n", 2);
 		free_2d(var->paths);
 		close_all(var);
+		free_int(var->p, var->pipe_num);
 		exit(1);
 	}
 }
@@ -30,6 +31,7 @@ void	ft_check_path(t_var *var)
 		free_2d(var->cmd);
 		free_2d(var->paths);
 		close_all(var);
+		free_int(var->p, var->pipe_num);
 		ft_putstr_fd("Command Not Found\n", 2);
 		exit(1);
 	}
