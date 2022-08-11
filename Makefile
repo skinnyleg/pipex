@@ -4,8 +4,6 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFILES	=	pipex.c\
 			pipex2.c\
-			libft_utils.c\
-			ft_split.c\
 			ft_pipex_utils.c\
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(CFILES:.c=.o))
@@ -19,9 +17,9 @@ OBJ_DIR = ./mand/obj
 SRC_DIR = mand/src
 
 BFILES	=	pipex.c\
-			pipex2.c\
-			libft_utils.c\
-			ft_split.c\
+			init_var.c\
+			here_doc.c\
+			utils.c\
 			ft_pipex_utils.c\
 
 OBJB = $(addprefix $(OBJ_DIRB)/,$(BFILES:.c=.o))
@@ -34,11 +32,13 @@ BONUS = pipex_bonus
 
 BON_DIR = bonus/src
 
-all : $(NAME)
+LIBFT = libft/libft.a
+
+all : bonus
 
 
-$(NAME) : $(OBJ)
-	@$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
+$(NAME) : $(LIBFT) $(OBJ)
+	@$(CC) $(LIBFT) $(OBJ) $(CFLAGS) -o $(NAME)
 	@echo "Done for pipex"
 
 $(OBJ_DIR):
@@ -47,10 +47,13 @@ $(OBJ_DIR):
 $(OBJ): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
 	@$(CC) -c $< -o $@
 
+$(LIBFT) :
+	@make -C libft
+
 bonus : $(BONUS)
 
-$(BONUS) : $(OBJB)
-	@$(CC) $(OBJB) $(CFLAGS) -o $(BONUS)
+$(BONUS) : $(LIBFT) $(OBJB)
+	@$(CC) $(LIBFT) $(OBJB) $(CFLAGS) -o $(BONUS)
 	@echo "Done for pipex_bonus"
 
 $(OBJ_DIRB):
@@ -61,8 +64,10 @@ $(OBJB): $(OBJ_DIRB)/%.o : $(BON_DIR)/%.c $(HEADERB) | $(OBJ_DIRB)
 
 clean :
 	@rm -rf $(OBJ_DIR) $(OBJ_DIRB)
+	@make clean -C libft
 
 fclean : clean
 	@rm -rf $(NAME) $(BONUS)
+	@make fclean -C libft
 
 re : fclean all

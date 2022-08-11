@@ -6,7 +6,7 @@
 /*   By: hmoubal <hmoubal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:38:35 by hmoubal           #+#    #+#             */
-/*   Updated: 2022/08/10 14:32:42 by hmoubal          ###   ########.fr       */
+/*   Updated: 2022/08/11 11:23:00 by hmoubal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <sys/wait.h>
+# include "../../libft/includes/libft.h"
 
 typedef struct s_var
 {
@@ -31,12 +32,6 @@ typedef struct s_var
 
 void	free_2d(char **s);
 void	ft_file(t_var *var);
-char	*ft_strjoin(char const *s1,	char const *s2);
-char	**ft_split(char const *s,	char c);
-size_t	ft_strlen(char const	*str);
-int		ft_strncmp(const char *str, const char *tab, size_t a);
-void	*ft_memcpy(void *dest,	const void *src,	size_t size);
-void	ft_putstr_fd(char *s,	int fd);
 void	ft_pid(pid_t pid, t_var *var);
 void	close_all(t_var *var);
 void	ft_check_env(t_var *var);
